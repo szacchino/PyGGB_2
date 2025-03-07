@@ -89,6 +89,13 @@ export const register = (mod: any, appApi: AppApi) => {
           withPropertiesFromNameValuePairs(new mod.Circle(spec), kwargs);
 
         switch (args.length) {
+          // case 1: {
+          //   if (ggb.isGgbObjectOfType(args[0], "circle")) {
+          //     return make({
+          //       kind: "wrap-existing",
+          //       label: args[0]
+          //     });
+          // }
           case 2: {
             if (ggb.isGgbObjectOfType(args[0], "point")) {
               if (ggb.isPythonOrGgbNumber(args[1])) {

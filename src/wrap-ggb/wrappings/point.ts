@@ -235,11 +235,15 @@ export const register = (
     },
     getsets: {
       is_visible: ggb.sharedGetSets.is_visible,
+      is_fixed: ggb.sharedGetSets.is_fixed,
       with_label: ggb.sharedGetSets.label_visible,
       is_independent: ggb.sharedGetSets.is_independent,
       color: ggb.sharedGetSets.color,
       color_floats: ggb.sharedGetSets.color_floats,
       size: ggb.sharedGetSets.size, // size of label points (circle)
+      caption: ggb.sharedGetSets.caption,
+      label_style: ggb.sharedGetSets.label_style,
+      label_visible: ggb.sharedGetSets.label_visible,
       x: {
         $get(this: SkGgbPoint) {
           return new Sk.builtin.float_(this.$xCoord());

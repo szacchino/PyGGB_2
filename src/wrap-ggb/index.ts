@@ -36,6 +36,7 @@ import { register as registerPolygon } from "./wrappings/polygon";
 import { register as registerSlider } from "./wrappings/slider";
 import { register as registerRotate } from "./wrappings/rotate";
 import { register as registerFunction } from "./wrappings/function"; //
+import { register as registerUtils } from "./wrappings/utils"; //
 import { register as registerIf } from "./wrappings/if";
 import { register as registerDistance } from "./wrappings/distance";
 import { register as registerIntersect } from "./wrappings/intersect";
@@ -105,11 +106,13 @@ declare var Sk: SkulptApi;
   registerSlider(mod, appApi);
   registerRotate(mod, appApi);
   registerFunction(mod, appApi); //
+  registerUtils(mod, appApi); //
   registerIf(mod, appApi);
   registerDistance(mod, appApi);
   registerIntersect(mod, appApi);
   registerZoom(mod, appApi);
   registerNumberOfObjects(mod, appApi);
+  registerPointIn(mod, appApi); //
   registerPointIn(mod, appApi); //
 
   registerClearConsole(mod, appApi);

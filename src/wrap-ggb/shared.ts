@@ -389,6 +389,7 @@ type ReadWriteProperty = ReadOnlyProperty & {
 };
 
 type SharedGetSets = {
+  is_fixed: ReadWriteProperty;
   is_visible: ReadWriteProperty;
   is_independent: ReadOnlyProperty;
   value: ReadWriteProperty;
@@ -397,6 +398,7 @@ type SharedGetSets = {
   color_floats: ReadOnlyProperty;
   size: ReadWriteProperty;
   line_thickness: ReadWriteProperty;
+  line_style: ReadWriteProperty;
   label_visible: ReadWriteProperty;
   label_style: ReadWriteProperty;
   caption: ReadWriteProperty;
@@ -417,6 +419,15 @@ const sharedGetSets = (ggbApi: GgbApi): SharedGetSets => ({
     $set(this: SkGgbObject, pyIsVisible: SkObject) {
       const isVisible = Sk.misceval.isTrue(pyIsVisible);
       ggbApi.setVisible(this.$ggbLabel, isVisible);
+    },
+  },
+  is_fixed: {
+    $get(this: SkGgbObject) {
+      return new Sk.builtin.bool(ggbApi.isFixed(this.$ggbLabel));
+    },
+    $set(this: SkGgbObject, pyIsVisible: SkObject) {
+      const isVisible = Sk.misceval.isTrue(pyIsVisible);
+      ggbApi.setFixed(this.$ggbLabel, isVisible);
     },
   },
   is_independent: {
@@ -479,6 +490,16 @@ const sharedGetSets = (ggbApi: GgbApi): SharedGetSets => ({
       throwIfNotNumber(pyThickness, "line_thickness must be a number");
       // TODO: Verify integer and in range [1, 13]
       ggbApi.setLineThickness(this.$ggbLabel, pyThickness.v);
+    },
+  },
+  line_style: {
+    $get(this: SkGgbObject) {
+      return new Sk.builtin.int_(ggbApi.getLineStyle(this.$ggbLabel));
+    },
+    $set(this: SkGgbObject, pyStyle: SkObject) {
+      throwIfNotNumber(pyStyle, "line_style must be a number");
+      // TODO: Verify integer and in range [1, 13]
+      ggbApi.setLineStyle(this.$ggbLabel, pyStyle.v);
     },
   },
   label_visible: {
@@ -562,6 +583,7 @@ export type AugmentedGgbApi = {
   withPropertiesMethodsSlice: MethodDescriptorsSlice;
   // setSize(width: number, height: number): void; // Add setSize definition
   evalCmd(cmd: string): string; // executes a Geogebra command and return the label of resulting object
+  evalCommand(cmd: string): boolean; // executes a Geogebra command with evalCommand method
   evalCmdMultiple(cmd: string): string[]; // added custom utilities
   getValue(label: string): number;
   setValue(label: string, value: number): void;
@@ -596,6 +618,7 @@ export const augmentedGgbApi = (ggbApi: GgbApi): AugmentedGgbApi => {
   }
   // const setSize = (width: number, height: number): void => ggbApi.setSize(width, height); //
   const evalCmd = (cmd: string): string => ggbApi.evalCommandGetLabels(cmd); // Internally calls ggbApi.evalCommandGetLabels(cmd)
+  const evalCommand = (cmd: string): boolean => ggbApi.evalCommand(cmd); // Internally calls ggbApi.evalCommandGetLabels(cmd)
   const evalCmdMultipleWrapper = (cmd: string): string[] => evalCmdMultiple(ggbApi, cmd); /////////////////////////////////////// calls the custom utility function
   const getValue = (label: string): any => ggbApi.getValue(label); // Calls ggbApi.getValue(label).
   const setValue = (label: string, value: number): void =>
@@ -634,6 +657,7 @@ export const augmentedGgbApi = (ggbApi: GgbApi): AugmentedGgbApi => {
     withPropertiesMethodsSlice,
     // setSize,//
     evalCmd,
+    evalCommand,
     evalCmdMultiple: evalCmdMultipleWrapper, //
     getValue,
     setValue,

@@ -5,6 +5,9 @@ export type GgbApi = {
 
   getVisible(label: string): boolean;
   setVisible(label: string, isVisible: boolean): void;
+  
+  isFixed(label: string): boolean;
+  setFixed(label: string, isVisible: boolean): void;
 
   isIndependent(label: string): boolean;
 
@@ -27,6 +30,9 @@ export type GgbApi = {
   getLineThickness(label: string): number;
   setLineThickness(label: string, thickness: number): number;
 
+  getLineStyle(label: string): number;
+  setLineStyle(label: string, style: number): number;
+
   getLabelVisible(label: string): boolean;
   setLabelVisible(label: string, visible: boolean): void;
 
@@ -40,6 +46,7 @@ export type GgbApi = {
   exists(label: string): boolean;
   getObjectNumber(): number;
 
+  evalCommand(cmd: string): boolean;
   evalCommandGetLabels(cmd: string): string;
 
   registerObjectUpdateListener(label: string, fun: AnyVoidFunction): void;

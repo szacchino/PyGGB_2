@@ -1,3 +1,8 @@
+# What's new in this fork
+
+- Added `line_style` property for Segment 
+
+
 # Python-driven GeoGebra
 
 A webapp to allow people to interact with GeoGebra via Python.
