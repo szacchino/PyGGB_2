@@ -48,6 +48,10 @@ export const register = (mod: any, appApi: AppApi) => {
     ) {
       this.ctorPointLabels = null;
       switch (spec.kind) {
+        case "wrap-existing": {
+          this.$ggbLabel = spec.label;
+          break;
+        }
         case "points-array": {
           this.ctorPointLabels = spec.points.map((p) => p.$ggbLabel);
           const ggbCmd = assembledCommand("Polygon", this.ctorPointLabels);
@@ -96,6 +100,8 @@ export const register = (mod: any, appApi: AppApi) => {
                 
                 return make({ kind: "points-array", points });
               }
+            } else if (ggb.isGgbObject(args[0]) && args[0].tp$name == "Polygon") {
+                return make({ kind: "wrap-existing", label:args[0].$ggbLabel });
             }
 
             throw badArgsError;
@@ -171,6 +177,8 @@ export const register = (mod: any, appApi: AppApi) => {
       color_floats: ggb.sharedGetSets.color_floats,
       opacity: ggb.sharedGetSets.opacity,
       line_thickness: ggb.sharedGetSets.line_thickness,
+      is_fixed: ggb.sharedGetSets.is_fixed,
+      line_style: ggb.sharedGetSets.line_style,
       _ggb_type: ggb.sharedGetSets._ggb_type,
       // TODO: List of segments?
     },

@@ -21,7 +21,14 @@ interface SkGgbIntersect extends SkGgbObject {
 }
 
 type SkGgbIntersectCtorSpec =
-  {
+// {
+//   kind: "basic_list";
+//   object1: SkGgbObject;
+//   object2: SkGgbObject;
+//   as_list: boolean;
+// }
+// | 
+{
       kind: "basic";
       object1: SkGgbObject;
       object2: SkGgbObject;
@@ -64,6 +71,15 @@ export const register = (
       let ggbCmd: string; // since ggbCmd must hold a string value, we explicitly declared it as string
 
       switch (spec.kind) {
+        // case "basic_list": {
+        //   if (spec.as_list) {
+        //     ggbCmd = `{Intersect(${spec.object1.$ggbLabel}, ${spec.object2.$ggbLabel})}`; 
+        //     break;
+        //   } else {
+        //     ggbCmd = `Intersect(${spec.object1.$ggbLabel}, ${spec.object2.$ggbLabel})`; 
+        //     break;
+        //   }
+        // }
         case "basic": {
           ggbCmd = `Intersect(${spec.object1.$ggbLabel}, ${spec.object2.$ggbLabel})`; 
           break;
@@ -231,6 +247,16 @@ export const register = (
       color_floats: ggb.sharedGetSets.color_floats,
       size: ggb.sharedGetSets.size,
       _ggb_type: ggb.sharedGetSets._ggb_type,
+      // object1: {
+      //   $get(this: SkGgbIntersect) {
+      //     return this.object1;
+      //   }
+      // },
+      // object2: {
+      //   $get(this: SkGgbIntersect) {
+      //     return this.object2;
+      //   }
+      // },
     },
   });
 

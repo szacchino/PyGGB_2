@@ -16,6 +16,7 @@ export const CodeEditor: React.FC<{}> = () => {
   const setCodeText = useStoreActions(
     (a) => a.editor.updateCodeTextAndScheduleSave
   );
+  const runProgram = useStoreActions((a) => a.controls.runProgram);
   const allDependenciesReady = useStoreState((s) => s.dependencies.allReady);
   const contentKind = useStoreState((s) => s.editor.contentKind);
 
@@ -47,6 +48,27 @@ export const CodeEditor: React.FC<{}> = () => {
 
   const setGlobalRef = (editor: any) => {
     PYGGB_CYPRESS().ACE_EDITOR = editor;
+    editor.commands.addCommand({
+      name: "runProgram",
+      bindKey: { mac: "Ctrl-Enter", win: "Ctrl-Enter" },
+      exec: () => runProgram(),
+    });
+
+    // editor.completers.push({
+    //   getCompletions: function(editor, session, pos, prefix, callback) {
+    //     var completions = [];
+    //     // we can use session and pos here to decide what we are going to show
+    //     ["Point", "Segment", "Intersect"].forEach(function(w) {
+
+    //         completions.push({
+    //             value: w,
+    //             meta: "my completion",
+
+    //         });
+    //     });
+    //     callback(null, completions);
+    //   }
+    // })
   };
 
   return (
@@ -63,6 +85,10 @@ export const CodeEditor: React.FC<{}> = () => {
         readOnly={!isReadWrite}
         ref={aceRef}
         onLoad={setGlobalRef}
+        setOptions={{
+          enableBasicAutocompletion: true,
+          enableLiveAutocompletion: true
+        }}
       />
       <div className={classNames("abs-0000", "busy-overlay", backingStatus)}>
         <Spinner />

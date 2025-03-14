@@ -1,6 +1,7 @@
 import { AppApi } from "../../shared/appApi";
-import { augmentedGgbApi } from "../shared";
+import { augmentedGgbApi, SkGgbObject } from "../shared";
 import { SkulptApi } from "../../shared/vendor-types/skulptapi";
+import { NULL } from "sass";
 
 declare var Sk: SkulptApi;
 
@@ -12,36 +13,49 @@ export const register = (mod: any, appApi: AppApi) => {
       console.error(command);
       throw new Sk.builtin.TypeError("Command must be a string");
     }
-  //   const result : boolean = ggb.evalCommand(command.v);
-  //   return ggb.wrapExistingGgbObject(result?"true" : "false");
-  // });
+    const result:string = ggb.evalCmd(command.v);
+    console.log(command.v, result);
+    if (result.indexOf(",") > -1) {
+      return ggb.wrapExistingGgbObject(result.split(',')[0].trim());
+    }
+    /*return ggb.wrapExistingGgbObject(ggb.evalCmd(result?"true" : "false"));*/
+    return ggb.wrapExistingGgbObject(result);
+  });
     
-    // try {
-      const results = ggb.evalCmdMultiple(command.v);
-
+ /*    try {
+      let results = ggb.evalCommandGetLabels(command.v);
+      let res : string[] = []
       if (typeof results === "string") {
         // Handle concatenated labels (e.g., "E,F")
         if (results.includes(",")) {
-          results = results.split(",").map(label => label.trim());
+          res = results.split(",").map(label => label.trim());
         } else {
           // Single label, return it as an array
-          results = [results];
+          res = [results];
         }
+      } else if (Array.isArray(results)) {
+        res = results
       }
-      return results.map(result => {
-        try {
-          return ggb.wrapExistingGgbObject( result )
+      if (res.length) {
+        return res.map(result => {
+          try {
+            return ggb.wrapExistingGgbObject( result )
+  
+          } catch(err) {
+            console.log(err);
+            return ggb.wrapExistingGgbObject( "false" )
+          }
+        })
+      } else {
+        console.log("Result of command '" + command.v + "'is empty")
+        return ggb.wrapExistingGgbObject("false");
 
-        } catch(err) {
-          console.log(err);
-          return ggb.wrapExistingGgbObject( "false" )
-        }
       }
-      )
-    // } catch(err) {
-    //   return ggb.wrapExistingGgbObject("false");
-    // }
-  });
+    } catch(err) {
+      console.log("Error for command '" + command.v + "'", err)
+      return ggb.wrapExistingGgbObject("false");
+    }
+  }); */
 
   mod.Cmd = cmd;
 };
