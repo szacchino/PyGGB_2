@@ -18,8 +18,18 @@ export const register = (mod: any, appApi: AppApi) => {
     if (result.indexOf(",") > -1) {
       return ggb.wrapExistingGgbObject(result.split(',')[0].trim());
     }
+    if (!result) {
+      return ggb.wrapExistingGgbObject(ggb.evalCmd("false"));
+    } else {
+      try {
+        return ggb.wrapExistingGgbObject(result);
+      } catch(err) {
+        console.log(err);
+        return ggb.wrapExistingGgbObject(ggb.evalCmd("false"));
+      }
+
+    }
     /*return ggb.wrapExistingGgbObject(ggb.evalCmd(result?"true" : "false"));*/
-    return ggb.wrapExistingGgbObject(result);
   });
     
  /*    try {
