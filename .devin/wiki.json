@@ -1,0 +1,302 @@
+{
+  "repo_notes": [
+    {
+      "content": "Geogebra commands wrapped in custom components are found in folder: src/wrap-ggb/wrappings. Other Geogebra commands not implemented there can be accessed through the Cmd(command:str) command."
+    }
+  ],
+  "pages": [
+    {
+      "title": "Overview",
+      "purpose": "Introduce PyGGB, its purpose as a Python IDE for GeoGebra geometry programming, and provide a high-level architectural summary",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Architecture",
+      "purpose": "Explain the overall system architecture and how the major components fit together",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Module System and Python-GeoGebra Bridge",
+      "purpose": "Deep dive into the most critical system: how Python modules are registered, the API handover queue pattern, and how Python code connects to GeoGebra",
+      "parent": "Architecture",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Python Execution Engine",
+      "purpose": "Explain how Skulpt compiles and executes Python code, the custom sleep() implementation, and error handling",
+      "parent": "Architecture",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "GeoGebra Integration",
+      "purpose": "Document how GeoGebra is embedded, initialized, and how the API is augmented for use by wrappers",
+      "parent": "Architecture",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "State Management",
+      "purpose": "Explain the Easy-Peasy store architecture, the main state slices (dependencies, editor, controls, modals), and how state flows through the application",
+      "parent": "Architecture",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "GeoGebra Object Wrapper System",
+      "purpose": "Overview of how TypeScript wrappers bridge Python objects to GeoGebra commands",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Wrapper Architecture and Shared Infrastructure",
+      "purpose": "Document the SkGgbObject interface, augmentedGgbApi, common properties system, and how wrappers are constructed",
+      "parent": "GeoGebra Object Wrapper System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Basic Geometric Objects",
+      "purpose": "Document Point, Circle, Line, and Segment wrappers with their constructor patterns and properties",
+      "parent": "GeoGebra Object Wrapper System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Complex Shapes and Curves",
+      "purpose": "Document Polygon, Ellipse, Parabola, Arc, and Vector wrappers",
+      "parent": "GeoGebra Object Wrapper System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Geometric Operations and Transformations",
+      "purpose": "Document Rotate, Intersect, Distance, Angle, and other operation wrappers",
+      "parent": "GeoGebra Object Wrapper System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Measurements, Predicates, and Special Points",
+      "purpose": "Document measurement functions (Area, Circumference), geometric predicates (AreCollinear, AreConcyclic), and special point constructions (Centroid, Incircle)",
+      "parent": "GeoGebra Object Wrapper System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Interactive Elements",
+      "purpose": "Document Slider and other UI-interactive wrappers, including event handling with when_moved()",
+      "parent": "GeoGebra Object Wrapper System",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "User Interface",
+      "purpose": "Overview of the React-based IDE interface and its major components",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "IDE Layout and Components",
+      "purpose": "Document the main IDE component, layout system (CSS Grid), GeoGebra pane, and output displays",
+      "parent": "User Interface",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Code Editor",
+      "purpose": "Document the Ace editor integration, resize handling, keyboard shortcuts, and read-only vs editable states",
+      "parent": "User Interface",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Menu Bar and Execution Controls",
+      "purpose": "Document the menu bar, file operations, run/pause/stop buttons, and execution state machine",
+      "parent": "User Interface",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Modal System",
+      "purpose": "Document the various modals (FileChooser, NewFile, Download, Share) and their state management",
+      "parent": "User Interface",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Error Handling and Output Display",
+      "purpose": "Document ErrorList component, traceback processing, stdout pane, and how Python errors are displayed",
+      "parent": "User Interface",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "File Management and Persistence",
+      "purpose": "Explain how user files are stored, managed, and persisted using IndexedDB",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Database Layer (Dexie)",
+      "purpose": "Document the PyGgbDexie class, UserFile schema, and database operations",
+      "parent": "File Management and Persistence",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "File Operations and Auto-Save",
+      "purpose": "Document file CRUD operations, the auto-save mechanism with debouncing, and file naming system",
+      "parent": "File Management and Persistence",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Share Links and Export",
+      "purpose": "Document how programs are shared via URL (with compression), and export functionality",
+      "parent": "File Management and Persistence",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Testing Infrastructure",
+      "purpose": "Overview of the Cypress-based testing system and test coverage",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Python Programs Test Suite",
+      "purpose": "Document the 80+ test specifications for geometric operations, error handling, and object creation patterns",
+      "parent": "Testing Infrastructure",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Example Programs and File Management Tests",
+      "purpose": "Document testing of example programs and file CRUD operations",
+      "parent": "Testing Infrastructure",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Developer Guide",
+      "purpose": "Information for developers who want to contribute to or extend PyGGB",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Development Setup",
+      "purpose": "How to set up a local development environment, use local GeoGebra bundle, and run the development server",
+      "parent": "Developer Guide",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Adding New GeoGebra Wrappers",
+      "purpose": "Step-by-step guide for creating new wrapper modules, registering them, and following wrapper patterns",
+      "parent": "Developer Guide",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Build and Deployment",
+      "purpose": "Document the build process, deployment to GitHub Pages, and custom hosting options",
+      "parent": "Developer Guide",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    }
+  ]
+}
